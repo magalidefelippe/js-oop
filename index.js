@@ -9,13 +9,12 @@ const circle = {
   radius: 1,
   location: {
     x: 10,
-    y: 10
+    y: 10,
   },
   draw: function () {
-    console.log('dibujado')
-  }
+    console.log("dibujado");
+  },
 };
-
 
 /*factory function
 is a better way, but we can use the advantages of the 
@@ -24,8 +23,8 @@ function createCircle(radius) {
   return {
     radius,
     draw: function () {
-      console.log('dibujado')
-    }
+      console.log("dibujado");
+    },
   };
 }
 
@@ -49,22 +48,34 @@ function Circle(radius) {
   let defaultLocation = { x: 0, y: 0 };
   this.getDefaultLocation = function () {
     return defaultLocation;
-  }
+  };
   // we wanna expose only the esencials -> DRAW and RADIUS.
   this.draw = function () {
-    console.log('dibujado')
-  }
+    console.log("dibujado");
+  };
 
   /*define the private property, it can be accesed
-   but dont wanna let it overwrite, i wanna it be read only*/
+   but dont wanna let it overwrite 
+   because it have a GETTER, i wanna it be read only
+   if we wanna modify the property outside the object
+   we can added a SETTER to the property
+   */
 
-   Object.defineProperty(this, 'defaultLocation', {
-     get: function(){
-       return defaultLocation;
-     }
-   })
+  Object.defineProperty(this, "defaultLocation", {
+    get: function () {
+      return defaultLocation;
+    },
+    set: function (value) {
+      /*
+       we can use a validation so that they 
+       do not enter null values ​​and 
+       do not break any method */
+
+      if (!value.x || !value.y) 
+        throw new Error('invalid location');
+      defaultLocation = value;
+    },
+  });
 }
 
 const another = new Circle(1);
-
-
