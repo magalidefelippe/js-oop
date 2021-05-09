@@ -1,7 +1,10 @@
-//object literal sintax -> no conviene cuando
-// se quiere crear otro objecto igual
-// si copiamos y pegamos el circulo y hay un bug en 
-// algun metodo, hay que modificar el metodo en todos los objectos.
+/*object literal ->
+ not the best way if we want to create two objects, because
+ We should copy and paste, if we find an error in any method,
+ you have to modify the method on all objects.
+ We cannot use the inheritance advantage, 
+ which is to avoid having to modify the same method in each object
+ */
 const circle = {
   radius: 1,
   location: {
@@ -14,7 +17,9 @@ const circle = {
 };
 
 
-//factory function
+/*factory function
+is a better way, but we can use the advantages of the 
+Javascript Object constructor, ej: encapsulation*/
 function createCircle(radius) {
   return {
     radius,
@@ -26,7 +31,10 @@ function createCircle(radius) {
 
 const newCircle = createCircle(20);
 
-// Constructor function
+/*Constructor function
+with the constructor we can use the inheritance
+and encapsulation
+*/
 function Circle(radius) {
   this.radius = radius;
   /* we have to hidde this property
